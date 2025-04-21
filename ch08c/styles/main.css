@@ -1,141 +1,127 @@
-/* variables */
+
 :root {
-	--primary-color: #931420;
-	--accent-color: #f6bb73;
-	--light-accent: #fffded;
-	--light: white;
-	--dark: black;
+	--primary-color : #931420;
+	--accent-color  : #f6bb73;
+	--light-accent  : #fffded;
+	--light         : #ffffff;
+	--dark          : #000000;
 }
 
-/* reset */
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* the default styles for the elements */
+html { background: var(--light); }
+
 body {
-	font-family: Arial, Helvetica, sans-serif;
-    font-size: 100%;
-    width: 80%;
-    margin: auto;
-    border: 3px solid var(--primary-color);
+	font-family : Arial, Helvetica, sans-serif;
+	font-size   : 100%;
+	width       : 80%;
+	margin      : auto;
+	border      : 3px solid var(--primary-color);
+	background  : var(--light);
 }
+
 header, section, aside, footer { padding: 1em; }
 h1, h2, h3, p, article, blockquote { padding-bottom: .5em; }
-ul { margin-left: 1em; }
-h1 { font-size: 150%; }
-h2 { font-size: 120%; }
-h3 { font-size: 110%; }
+h1 { font-size: 150%; }  h2 { font-size: 120%; }  h3 { font-size: 110%; }
 a:focus, a:hover { font-style: italic; }
 
-/* the styles for the header */
 header {
 	border-bottom: 3px solid var(--primary-color);
-	background-image: linear-gradient(30deg, 
-		var(--accent-color) 0%, 
-		var(--light-accent) 25%, 
-		var(--light) 50%, 
-		var(--light-accent) 75%, 
+	background-image: linear-gradient(
+		30deg,
+		var(--accent-color)   0%,
+		var(--light-accent) 25%,
+		var(--light)        50%,
+		var(--light-accent) 75%,
 		var(--accent-color) 100%);
-	& h2 {
-		font-size: 175%;
-		color: var(--primary-color);
-		padding-bottom: 0;
-	}
-	& h3 {
-		font-size: 130%;
-		font-style: italic;
-	}
-	& img {
-		float: left;
-		margin: 0 30px;
-		width: clamp(40px, 15%, 66px);
-	}
 }
+header img { float: left; margin: 0 30px; width: clamp(40px, 15%, 66px); }
+header h2  { font-size: 175%; color: var(--primary-color); }
+header h3  { font-size: 130%; font-style: italic; color: var(--accent-color); }
 
-/* the styles for the main element */
-main {
-	clear: left;
-	display: flex;
+main { clear: left; display: flex; }
+section { flex: 1 1 75%; }
+aside   { flex: 1 1 25%; }
+
+article img {
+	float: left;
+	margin: .25em 1em 1em 0;
+	border: 1px solid var(--dark);
+	width: min(100%, 225px);
 }
+aside blockquote { font-style: italic; margin-left: .5em; }
 
-/* the styles for the section */
-section {
-	flex-basis: 75%;
-	& h1 {
-		color: var(--primary-color);
-	}
-	& article + h2 {
-		clear: left;
-		color: var(--primary-color);
-		border-top: 3px solid var(--primary-color);
-		padding-top: .5em;
-	}
-}
+footer { background: var(--primary-color); }
+footer p { text-align: center; color: var(--light); }
 
-/* the styles for the article */
-article {
-	padding-top: .5em;
-	margin-bottom: .5em;
-	& img {
-		float: left;
-		margin: .25em 1em 1em 0;
-		border: 1px solid var(--dark);
-		width: min(100%, 225px);
-	}
-}
-
-/* the styles for the aside */
-aside {
-	flex-basis: 25%;
-	& h2 {
-		color: var(--primary-color);
-	}
-	& img {
-		margin-bottom: .9em;
-	}
-	& blockquote {
-		font-style: italic;
-		margin-left: .5em;
-	}
-}
-
-/* the styles for the footer */
-footer {
-	background-color: var(--primary-color);
-	& p {
-		text-align: center;
-		color: white;
-		padding-bottom: 0; 
-	}
-}
-
-/* the styles for the navigation menu */
 .navbar {
-	background-color: var(--primary-color);
-	& ul {
-		list-style-type: none;
-		margin: 0;
-	}
-	& a {
-		display: block;
-		padding: .75em;
-		text-decoration: none;
-		color: var(--light);
-	}
-	& a.current {
-		color: var(--accent-color);
-		font-weight: bold;
-	}
-	& a.current:hover { 
-		font-style: normal; /* override hover effect */
-	}
+	background     : var(--primary-color);
+	color          : var(--light);
+	container-type : inline-size;
+	position       : relative;
+	z-index        : 10;
 }
+
+.navbar > input[type="checkbox"] { display: none; }
+
+.menu-btn {
+	display: block;
+	padding: .75em 1em;
+	cursor: pointer;
+	user-select: none;
+	color: var(--light);
+}
+.menu-btn::before                  { content: '\2630'; font-size: 1.25rem; }
+.navbar > input:checked + .menu-btn::before { content: '\2715'; }
 
 .menu {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
+	display: none;
+	flex-direction: column;
+	list-style: none;
+	margin: 0;
+}
+.navbar > input:checked + .menu-btn + .menu { display: flex; }
+
+.menu a {
+	display: block;
+	padding: .75em 1.25em;
+	text-decoration: none;
+	color: var(--light);
+	white-space: nowrap;
+}
+.menu a.current            { color: var(--accent-color); font-weight: bold; }
+.menu a.current:hover      { font-style: normal; }
+
+.menu li { position: relative; }
+.menu li:has(.submenu) > a small::before {
+	content: '\25B6';
+	font-size: .7rem;
+}
+
+.submenu {
+	position: absolute;
+	left: 100%;
+	top: 0;
+	min-width: 180px;
+	background: var(--primary-color);
+	list-style: none;
+	display: none;
+	z-index: 999;
+}
+.menu li:hover > .submenu { display: block; }
+.submenu a { padding: .75em; }
+
+@container (min-width: 560px) {
+
+	.menu-btn { display: none; }
+
+	.menu {
+		display: flex !important;
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
+
+	.menu li:has(.submenu) > a small::before { content: '\25BC'; }
+	.submenu { left: 0; top: 100%; }
+
 }
