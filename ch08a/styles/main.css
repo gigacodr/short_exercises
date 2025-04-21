@@ -1,130 +1,137 @@
-/* variables */
+
 :root {
 	--primary-color: #931420;
-	--accent-color: #f6bb73;
-	--light-accent: #fffded;
-	--light: white;
-	--dark: black;
+	--accent-color : #f6bb73;
+	--light-accent : #fffded;
+	--light        : #ffffff;
+	--dark         : #000000;
 }
 
-/* reset */
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
 
-/* the default styles for the elements */
+html { background: var(--light); }
 body {
 	font-family: Arial, Helvetica, sans-serif;
-    font-size: 100%;
-    width: 80%;
-    margin: auto;
-    border: 3px solid var(--primary-color);
+	font-size: 100%;
+	width: 80%;
+	margin: auto;
+	border: 3px solid var(--primary-color);
+	background: var(--light);
 }
-header, section, aside, footer { padding: 1em; }
+
+header,
+section,
+aside,
+footer { padding: 1em; }
+
 h1, h2, h3, p, article { padding-bottom: .5em; }
+
 h1 { font-size: 150%; }
 h2 { font-size: 120%; }
 h3 { font-size: 110%; }
-a:focus, a:hover { font-style: italic; }
 
-/* the styles for the header */
+a:focus,
+a:hover { font-style: italic; }
+
 header {
 	border-bottom: 3px solid var(--primary-color);
-	background-image: linear-gradient(30deg, 
-		var(--accent-color) 0%, 
-		var(--light-accent) 25%, 
-		var(--light) 50%, 
-		var(--light-accent) 75%, 
+	background-image: linear-gradient(
+		30deg,
+		var(--accent-color)   0%,
+		var(--light-accent) 25%,
+		var(--light)        50%,
+		var(--light-accent) 75%,
 		var(--accent-color) 100%);
-	& h2 {
-		font-size: 175%;
-		color: var(--primary-color);
-		padding-bottom: 0;
-	}
-	& h3 {
-		font-size: 130%;
-		font-style: italic;
-	}
-	& img {
-		float: left;
-		margin: 0 30px;
-		width: clamp(40px, 15%, 66px);
-	}
 }
 
-/* the styles for the main element */
+header img {
+	float: left;
+	margin: 0 30px;
+	width: clamp(40px, 15%, 66px);
+}
+
+header h2 {
+	font-size: 175%;
+	color: var(--primary-color);
+	padding-bottom: 0;
+}
+
+header h3 {
+	font-size: 130%;
+	font-style: italic;
+	color: var(--accent-color);
+	display: none;
+}
+
 main {
 	clear: left;
 	display: flex;
+	flex-direction: column;
 }
 
-/* the styles for the section */
-section {
-	order: 2;
-	flex-basis: 75%;
-	& h1 {
-		color: var(--primary-color);
-		margin: 0;
-	}
+article img {
+	float: left;
+	margin: .25em 1em 1em 0;
+	border: 1px solid var(--dark);
+	width: min(100%, 250px);
 }
 
-/* the styles for the article */
-article {
-	& img {
-		float: left;
-		margin: .25em 1em 1em 0;
-		border: 1px solid var(--dark);
-		width: min(100%, 250px);
-	}
-}
+aside h2 { color: var(--primary-color); }
 
-/* the styles for the aside */
-aside {
-	order: 1;
-	flex-basis: 25%;
-	& h2 {
-		color: var(--primary-color);
-	}
-	& img {
-		margin-bottom: .9em;
-	}
-}
-
-/* the styles for the footer */
-footer {
-	background-color: var(--primary-color);
-	& p {
-		text-align: center;
-		color: white;
-		padding-bottom: 0; 
-	}
-}
-
-/* the styles for the navigation menu */
 nav {
 	background-color: var(--primary-color);
-	& ul { 
-		display: flex;
-		flex-direction: column;
-		list-style: none;
+}
+
+nav ul {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+}
+
+nav a {
+	display: block;
+	padding: .75em;
+	text-decoration: none;
+	font-weight: bold;
+	color: var(--light);
+}
+
+nav a:hover         { color: var(--accent-color); }
+nav a.current       { background: var(--accent-color); color: var(--dark); }
+nav a.current:hover { font-style: normal; }
+
+footer {
+	background-color: var(--primary-color);
+}
+
+footer p {
+	text-align: center;
+	color: var(--light);
+	padding-bottom: 0;
+}
+
+@media screen and (min-width: 520px) {
+	header h3 { display: block; }
+}
+
+@media screen and (min-width: 768px) {
+
+	main {
+		flex-direction: row;
 	}
-	& a {
-		display: block;
-		padding: .75em;
-		text-decoration: none;
-		font-weight: bold;
-		color: var(--light);
+
+	section {
+		order: 2;
+		flex-basis: 75%;
 	}
-	& a:hover {
-		color: var(--accent-color);
+
+	aside  {
+		order: 1;
+		flex-basis: 25%;
 	}
-	& a.current {
-		background-color: var(--accent-color);
-		color: var(--dark);
-	}
-	& a.current:hover { 
-		font-style: normal; /* override default hover effect */
-	}
+
 }
