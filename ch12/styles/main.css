@@ -1,10 +1,16 @@
-/* variables */
+
 :root {
     --light: white;
     --dark: black;
+    --valid-green: green;
+    --invalid-red: red;
+    --submit-green: #006400;
+    --submit-green-hover: #008000;
+    --reset-red: #CC0000;
+    --reset-red-hover: #FF0000;
+    --border-color: #ccc;
 }
 
-/* reset */
 * {
     margin: 0;
     padding: 0;
@@ -15,21 +21,111 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 100%;
     width: 90%;
+    max-width: 600px;
     margin: auto;
     padding: 1em;
 }
-h1, h2, h3 {
+h1 {
+    padding-bottom: .5em;
+    font-weight: bold;
+    font-size: 1.8em;
+}
+h2, h3 {
     padding-bottom: .5em;
 }
-form, input, select, textarea {
+
+form {
     width:100%;
 }
-input, select, button {
-    font-size: inherit;
-    padding: .25em;
-    margin-bottom: .5em;
+
+fieldset {
+    border: 1px solid var(--border-color);
+    padding: 1em 1.5em;
+    margin-bottom: 1.5em;
     border-radius: 5px;
 }
+
+legend {
+    font-weight: bold;
+    padding: 0 .5em;
+    font-size: 1.1em;
+}
+
 label {
     display: block;
+    margin-bottom: .25em;
+    margin-top: .75em;
+}
+fieldset div:first-child label {
+    margin-top: 0;
+}
+
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    width:100%;
+    font-size: inherit;
+    padding: .5em;
+    margin-bottom: .5em;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+}
+
+input:required:invalid,
+textarea:required:invalid {
+    border-color: var(--invalid-red);
+}
+
+input:required:valid,
+textarea:required:valid {
+    border-color: var(--valid-green);
+}
+
+::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+.buttons {
+    margin-top: 1.5em;
+    text-align: left;
+}
+
+.btn {
+    display: inline-block;
+    padding: .75em 1.5em;
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--light);
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: .5em;
+    min-width: 100px;
+}
+
+.btn-submit {
+    background-color: var(--submit-green);
+    border-color: var(--submit-green);
+}
+.btn-submit:hover {
+    background-color: var(--submit-green-hover);
+    border-color: var(--submit-green-hover);
+}
+
+.btn-reset {
+    background-color: var(--reset-red);
+    border-color: var(--reset-red);
+}
+.btn-reset:hover {
+    background-color: var(--reset-red-hover);
+    border-color: var(--reset-red-hover);
+}
+
+body > h1 {
+}
+body > h2 {
 }
