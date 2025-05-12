@@ -14,7 +14,15 @@
 		table {
 			border-collapse: collapse;
 			border: 1px solid black;
+            width: 100%;
 		}
+        caption {
+            font-size: 1.2em;
+            font-weight: bold;
+            padding-bottom: .5em;
+            caption-side: top;
+            text-align: left;
+        }
 		thead {
 			background-color: lightgreen;
 		}
@@ -24,61 +32,170 @@
 			text-align: left;
 			vertical-align: middle;
 		}
-		tbody tr:nth-child(even) td {
-			background-color: lightgrey;
-		}
-        tbody td:last-child {
+        th.years, td.years {
             text-align: right;
         }
+		tbody tr:nth-child(even) td {
+		}
+
+        td.department-cell-wide {
+            font-weight: bold;
+            vertical-align: top;
+        }
+
+        tfoot tr.total-row td {
+            background-color: lightgreen;
+            font-weight: bold;
+        }
+        tfoot td.total-label {
+            text-align: right;
+        }
+
+    @media (max-width: 639px) {
+        body {
+            width: 95%;
+        }
+        table {
+            border: none;
+            margin-top: 1em;
+        }
+        caption {
+             text-align: center;
+        }
+
+        thead {
+            display: none;
+        }
+
+        tbody, tfoot {
+            display: block;
+        }
+        
+        tbody tr, tfoot tr.total-row {
+            display: block;
+            margin-bottom: 1em;
+            box-sizing: border-box;
+        }
+        
+        tbody tr {
+            border: 1px solid #ccc;
+            padding: .5em;
+        }
+
+        td {
+            display: block;
+            width: 100%; 
+            box-sizing: border-box;
+            border: none;
+            padding: .2em 0; 
+            text-align: left !important;
+            vertical-align: baseline;
+        }
+
+        td.department-cell-wide {
+            display: none;
+        }
+
+        tr.department-start::before {
+            content: attr(data-department);
+            display: block;
+            background-color: lightgreen;
+            font-weight: bold;
+            padding: .5em;
+            margin: calc(-.5em - 1px) calc(-.5em - 1px) .5em calc(-.5em - 1px);
+            border-bottom: 1px solid black;
+        }
+
+        td[data-label="Name"] {
+            font-weight: bold;
+        }
+
+        td[data-label="Years of Service"]::before {
+            content: "Years of Service:";
+            display: block;
+            font-weight: normal;
+        }
+        td[data-label="Years of Service"] {
+            padding-top: 0.1em;
+        }
+
+        tfoot tr.total-row {
+            background-color: lightgreen;
+            font-weight: bold;
+            padding: .5em;
+            border: none;
+            margin-top: 1em;
+        }
+        tfoot tr.total-row td {
+            display: inline;
+            padding: 0; 
+            font-weight: bold; 
+            background-color: transparent;
+        }
+        tfoot td.total-label::after {
+            content: " ";
+        }
+    }
 	</style>
 </head>
 
 <body>
 <table>
+    <caption>Employee Table</caption>
 	<thead>
 		<tr>
+			<th>Department</th>
 			<th>Name</th>
 			<th>E-mail</th>
-			<th class="right">Years of Service</th>
+			<th class="years">Years of Service</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>Joel Murach</td>
-			<td>joelmurach@yahoo.com</td>
-			<td>22</td>
+		<tr class="department-start" data-department="Editorial">
+			<td rowspan="3" class="department-cell-wide">Editorial</td>
+			<td data-label="Name">Joel Murach</td>
+			<td data-label="E-mail">joelmurach@yahoo.com</td>
+			<td data-label="Years of Service" class="years">22</td>
 		</tr>
 		<tr>
-			<td>Anne Boehm</td>
-			<td>anne@murach.com</td>
-			<td>34</td>
+			<td data-label="Name">Anne Boehm</td>
+			<td data-label="E-mail">anne@murach.com</td>
+			<td data-label="Years of Service" class="years">34</td>
 		</tr>
 		<tr>
-			<td>Zak Ruvalcaba</td>
-			<td>zak@modulemedia.com</td>
-			<td>4</td>
+			<td data-label="Name">Zak Ruvalcaba</td>
+			<td data-label="E-mail">zak@modulemedia.com</td>
+			<td data-label="Years of Service" class="years">4</td>
+		</tr>
+		<tr class="department-start" data-department="Marketing">
+			<td rowspan="2" class="department-cell-wide">Marketing</td>
+			<td data-label="Name">Judy Taylor</td>
+			<td data-label="E-mail">judy@murach.com</td>
+			<td data-label="Years of Service" class="years">39</td>
 		</tr>
 		<tr>
-			<td>Judy Taylor</td>
-			<td>judy@murach.com</td>
-			<td>39</td>
+			<td data-label="Name">Bethany Lee</td>
+			<td data-label="E-mail">bethany@murach.com</td>
+			<td data-label="Years of Service" class="years">10</td>
+		</tr>
+		<tr class="department-start" data-department="Customer Service">
+			<td rowspan="2" class="department-cell-wide">Customer Service</td>
+			<td data-label="Name">Kelly Slivkoff</td>
+			<td data-label="E-mail">kelly@murach.com</td>
+			<td data-label="Years of Service" class="years">25</td>
 		</tr>
 		<tr>
-			<td>Bethany Lee</td>
-			<td>bethany@murach.com</td>
-			<td>10</td>
-		</tr>
-		<tr>
-			<td>Kelly Slivkoff</td>
-			<td>kelly@murach.com</td>
-			<td>25</td>
-		</tr>
-		<tr>
-			<td>Juliette Baylon</td>
-			<td>juliette@murach.com</td>
-			<td>1</td>
+			<td data-label="Name">Juliette Baylon</td>
+			<td data-label="E-mail">juliette@murach.com</td>
+			<td data-label="Years of Service" class="years">1</td>
 		</tr>
 	</tbody>
+    <tfoot>
+        <tr class="total-row">
+            <td colspan="3" class="total-label">Total Years of Service</td>
+            <td class="total-value years">105</td>
+        </tr>
+    </tfoot>
 </table>
 </body>
 </html>
