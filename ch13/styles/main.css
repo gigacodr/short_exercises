@@ -72,7 +72,7 @@ section {
 
 /* the styles for the article */
 article {
-	& img {
+	& img, & video {
 		float: left;
 		margin: .25em 1em 1em 0;
 		border: 1px solid var(--dark);
